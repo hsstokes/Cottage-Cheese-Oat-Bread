@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GF Cottage Cheese Oat Bread — Oven Version</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oat: #F2E9D8;
+    --oat-deep: #E7D9BE;
+    --crust: #8B5A2B;
+    --crust-dark: #5C3A1A;
+    --seed: #2E2620;
+    --olive: #5F6B3F;
+    --tomato: #B8492E;
+    --cheddar: #D79A2C;
+    --line: #2E2620;
+    --card: #FBF6EC;
+    --grid: rgba(46,38,32,0.06);
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background-color:var(--oat);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color:var(--seed);
+    font-family:'IBM Plex Mono', monospace;
+    line-height:1.55;
+    padding: 40px 20px 80px;
+  }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  header{
+    border: 3px solid var(--line);
+    background: var(--card);
+    padding: 32px 36px 28px;
+    margin-bottom: 28px;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--crust-dark);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  h1{
+    font-family:'DM Serif Display', serif;
+    font-weight: 400;
+    font-size: clamp(30px, 5vw, 46px);
+    margin: 0 0 12px;
+    color: var(--crust-dark);
+    line-height: 1.1;
+  }
+
+  .desc{
+    font-size: 14.5px;
+    color: var(--seed);
+    max-width: 60ch;
+    margin: 0 0 18px;
+  }
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .meta{
+    border: 2px solid var(--line);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    background: var(--oat);
+  }
+
+  /* signature: rise/bake timeline */
+  .timeline{
+    display:flex;
+    border: 3px solid var(--line);
+    margin: 0 0 28px;
+    background: var(--card);
+    overflow:hidden;
+  }
+  .tl-stage{
+    flex:1;
+    padding: 16px 14px;
+    border-right: 3px solid var(--line);
+    position:relative;
+  }
+  .tl-stage:last-child{ border-right:none; }
+  .tl-stage .num{
+    font-family:'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--crust);
+    display:block;
+    margin-bottom: 4px;
+  }
+  .tl-stage .label{
+    font-size: 11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    font-weight:600;
+  }
+  .tl-stage .time{
+    font-size: 11px;
+    color: var(--crust-dark);
+    margin-top:4px;
+  }
+  .tl-stage.mix{ background: var(--oat-deep); }
+  .tl-stage.rise{ background: #EFE6CE; }
+  .tl-stage.bake{ background: #E9D9B8; }
+  .tl-stage.cool{ background: var(--oat-deep); }
+
+  .grid2{
+    display:grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 24px;
+  }
+  @media (max-width: 720px){
+    .grid2{ grid-template-columns: 1fr; }
+  }
+
+  section.panel{
+    border: 3px solid var(--line);
+    background: var(--card);
+    padding: 24px 26px;
+    margin-bottom: 24px;
+  }
+
+  h2{
+    font-family:'DM Serif Display', serif;
+    font-weight:400;
+    font-size: 22px;
+    margin: 0 0 16px;
+    color: var(--crust-dark);
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 8px;
+  }
+
+  ul.ingredients{
+    list-style:none;
+    margin:0; padding:0;
+  }
+  ul.ingredients li{
+    display:flex;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(46,38,32,0.25);
+    font-size: 13.5px;
+  }
+  ul.ingredients li:last-child{ border-bottom:none; }
+  ul.ingredients li .amt{
+    font-weight:600;
+    color: var(--crust-dark);
+    white-space:nowrap;
+  }
+  ul.ingredients li.mixin .amt{ color: var(--olive); }
+
+  .swatches{
+    display:flex;
+    gap:6px;
+    margin: 14px 0 4px;
+  }
+  .swatch{
+    width:14px; height:14px;
+    border: 2px solid var(--line);
+  }
+  .sw-olive{ background: var(--olive); }
+  .sw-tomato{ background: var(--tomato); }
+  .sw-cheddar{ background: var(--cheddar); }
+  .swatch-label{
+    font-size: 10.5px;
+    color: var(--seed);
+    align-self:center;
+    margin-left:4px;
+  }
+
+  ol.steps{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset: step;
+  }
+  ol.steps li{
+    counter-increment: step;
+    display:grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(46,38,32,0.15);
+    align-items:start;
+  }
+  ol.steps li:last-child{ border-bottom:none; }
+  ol.steps li::before{
+    content: counter(step);
+    font-family:'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--card);
+    background: var(--crust);
+    border: 2px solid var(--line);
+    width: 32px; height: 32px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-title{
+    font-weight:600;
+    font-size: 13.5px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color: var(--crust-dark);
+    margin-bottom: 4px;
+  }
+  .step-body{
+    font-size: 13.5px;
+  }
+  .step-timer{
+    display:inline-block;
+    margin-top:6px;
+    font-size: 11.5px;
+    font-weight:600;
+    color:var(--tomato);
+    border:1.5px solid var(--tomato);
+    padding: 2px 8px;
+  }
+
+  .note{
+    border: 2px dashed var(--crust);
+    background: var(--oat-deep);
+    padding: 16px 18px;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+  .note strong{ color: var(--crust-dark); }
+
+  footer{
+    text-align:center;
+    font-size: 11px;
+    color: rgba(46,38,32,0.5);
+    margin-top: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  input[type="checkbox"]{
+    width:16px; height:16px;
+    accent-color: var(--crust);
+    margin-top:2px;
+  }
+  .check-row{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Baking · Gluten-free · Loaf tin</div>
+    <h1>Cottage Cheese Oat Bread</h1>
+    <p class="desc">Oven version, adapted from bread machine v3.0. With olives, sun-dried tomato and cheddar folded through. Better crumb control than the machine cycle — check with a skewer, not the clock.</p>
+    <div class="meta-row">
+      <span class="meta">180°C fan</span>
+      <span class="meta">900g loaf tin</span>
+      <span class="meta">~2.5 hrs total</span>
+      <span class="meta">10 slices</span>
+    </div>
+  </header>
+
+  <div class="timeline">
+    <div class="tl-stage mix">
+      <span class="num">01</span>
+      <span class="label">Mix</span>
+      <span class="time">15 min</span>
+    </div>
+    <div class="tl-stage rise">
+      <span class="num">02</span>
+      <span class="label">Rise</span>
+      <span class="time">45 min</span>
+    </div>
+    <div class="tl-stage bake">
+      <span class="num">03</span>
+      <span class="label">Bake</span>
+      <span class="time">50–60 min</span>
+    </div>
+    <div class="tl-stage cool">
+      <span class="num">04</span>
+      <span class="label">Cool</span>
+      <span class="time">2+ hrs</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <section class="panel">
+      <h2>Ingredients</h2>
+      <ul class="ingredients">
+        <li><span>GF oat flour</span><span class="amt">300g</span></li>
+        <li><span>Cottage cheese, blended smooth</span><span class="amt">300g</span></li>
+        <li><span>Large eggs, room temp</span><span class="amt">2</span></li>
+        <li><span>Olive oil (optional — see note)</span><span class="amt">1 tbsp</span></li>
+        <li><span>Honey or sugar</span><span class="amt">1 tbsp</span></li>
+        <li><span>Salt</span><span class="amt">1 tsp</span></li>
+        <li><span>Instant yeast</span><span class="amt">2 tsp</span></li>
+        <li><span>Xanthan gum</span><span class="amt">1 tsp</span></li>
+        <li><span>Baking powder</span><span class="amt">1 tsp</span></li>
+        <li><span>Warm water</span><span class="amt">70ml</span></li>
+        <li><span>Seeds, for topping</span><span class="amt">2 tbsp</span></li>
+        <li class="mixin"><span>Olives, chopped, patted dry</span><span class="amt">70g</span></li>
+        <li class="mixin"><span>Sun-dried tomatoes, drained, chopped</span><span class="amt">60g</span></li>
+        <li class="mixin"><span>Cheddar, grated (reserve some)</span><span class="amt">80g</span></li>
+      </ul>
+      <div class="swatches">
+        <div class="swatch sw-olive"></div><span class="swatch-label">olive</span>
+        <div class="swatch sw-tomato"></div><span class="swatch-label">tomato</span>
+        <div class="swatch sw-cheddar"></div><span class="swatch-label">cheddar</span>
+      </div>
+      <div class="note">
+        <strong>Water &amp; oil note —</strong> reduced from the plain version since olives, sun-dried tomatoes and cheddar all bring their own oil and moisture. Pat olives and tomatoes dry before folding in.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Method</h2>
+      <ol class="steps">
+        <li>
+          <div>
+            <div class="step-title">Prep</div>
+            <div class="step-body">Eggs out of the fridge 30 minutes ahead. Preheat oven to 180°C fan. Grease and line a 900g loaf tin.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Wet mix-ins</div>
+            <div class="step-body">Blend cottage cheese until completely smooth. Pat olives and sun-dried tomatoes dry with kitchen paper.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Wet ingredients</div>
+            <div class="step-body">Whisk together warm water, eggs, blended cottage cheese, oil and honey until combined.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Dry ingredients</div>
+            <div class="step-body">Mix oat flour, xanthan gum, baking powder and salt, then stir in the yeast.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Bring together</div>
+            <div class="step-body">Fold dry into wet until just combined — thick, sticky batter. Fold in olives, sun-dried tomatoes and most of the cheddar (reserve a little). Add a spoon of oat flour if it's looser than thick cake batter — don't chase it with more water.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Into the tin</div>
+            <div class="step-body">Scrape into the tin, smooth the top with a wet spatula. Scatter over seeds and reserved cheddar.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Rise</div>
+            <div class="step-body">Cover loosely with a damp tea towel or oiled cling film. Leave somewhere warm until visibly puffed.</div>
+            <span class="step-timer">⏱ ~45 min</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Bake</div>
+            <div class="step-body">180°C fan, 50–60 minutes. Tent loosely with foil after 25–30 minutes once golden. Done when a skewer in the centre comes out clean.</div>
+            <span class="step-timer">⏱ 50–60 min</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="step-title">Cool completely</div>
+            <div class="step-body">Turn out onto a wire rack. Cool fully before slicing — the crumb keeps setting as it cools, especially with these mix-ins.</div>
+            <span class="step-timer">⏱ 2+ hrs</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </div>
+
+  <footer>gf cottage cheese oat bread — oven version — heidistokes.org.uk</footer>
+</div>
+</body>
+</html>
